@@ -15,11 +15,13 @@ public class TaskService {
 	private TaskRepository taskRepository;
 	
 	@Transactional
-	public Task insertTask(Task task) {
-		
+	public Task insertTask(Task task) throws Exception {
+		try {
 		Task response = taskRepository.saveAndFlush(task);
-		
 		return response;
+		}catch(Exception e) {
+			throw new Exception();
+		}
 	}
 	
 	@Transactional(readOnly = true)
@@ -56,6 +58,20 @@ public class TaskService {
 		
 		
 		return response;
+	}
+	
+	@Transactional
+	public Boolean deleteTaskById(UUID taskId) {
+		try {
+		
+		Task task = findTaskById(taskId);
+		taskRepository.deleteById(taskId);
+		return true;
+		
+		} catch(Exception e) {
+			return false;
+		}
+		
 	}
 
 }
