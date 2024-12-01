@@ -63,9 +63,7 @@ public class TaskService {
 	@Transactional
 	public Boolean deleteTaskById(UUID taskId) {
 		try {
-		
-		Task task = findTaskById(taskId);
-		taskRepository.deleteById(taskId);
+			taskRepository.deleteById(taskId);
 		return true;
 		
 		} catch(Exception e) {

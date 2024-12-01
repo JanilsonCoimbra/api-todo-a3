@@ -1,0 +1,7 @@
+{"properties": [
+  {
+    "name": "firebase.apiKey",
+    "type": "java.lang.String",
+    "description": "A description for 'firebase.apiKey'"
+  }
+]}
