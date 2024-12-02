@@ -25,7 +25,6 @@ public class AuthController {
 
     @PostMapping("/token")
     public String generateIdToken(@RequestBody UserModel user) {
-    	System.out.println("Apikey ---------"+apiKey);
         return firebaseAuthService.authenticateUserAndGetIdToken(user.getEmail(), user.getPassword(), apiKey);
     }
 
@@ -37,4 +36,19 @@ public class AuthController {
             throw new RuntimeException("Erro ao gerar token personalizado: " + e.getMessage());
         }
     }
+    
+    @PostMapping("/register")
+    public String registerUser(@RequestBody UserModel user) {
+    	System.out.println("Apikey ---------"+apiKey);
+
+        try {
+            String uid = firebaseAuthService.registerUser(user.getEmail(), user.getPassword(), apiKey);
+            return "Usuário registrado com sucesso! UID: " + uid;
+        } catch (Exception e) {
+            throw new RuntimeException("Erro ao registrar usuário: " + e.getMessage());
+        }
+    }
+
+    
+    
 }
